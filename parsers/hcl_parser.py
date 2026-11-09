@@ -5,7 +5,35 @@ class HCL_Parser:
 
     def parse(self) -> dict:
         """Разбор всего файла"""
-        ...
+        
+        dct = dict()
+
+        self.skip_ignored()
+
+        while (
+            self.pos < len(self.text)
+        ):
+            self.skip_ignored()
+
+            key = self.parse_identifier() # Получения ключа
+
+            self.skip_ignored()
+            if self.pos >= len(self.text):
+                raise ValueError("Неправильный формат файла")
+
+            self.expect('=')
+
+            self.skip_ignored()
+            if self.pos >= len(self.text):
+                raise ValueError("У ключа нет значения")
+
+            value = self.parse_value() # Получение значения ключа
+
+            dct[key] = value
+
+            self.skip_ignored()
+
+        return dct
 
     def skip_whitespace(self) -> None:
         """Пропускет пробелы, переносы строк и табуляцию"""
