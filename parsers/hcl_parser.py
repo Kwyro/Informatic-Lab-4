@@ -10,7 +10,12 @@ class HCL_Parser:
 
     def skip_whitespace(self) -> None:
         """Пропускет пробелы, переносы строк и табуляцию"""
-        ...
+        
+        while (
+                self.pos < len(self.text)
+                and self.text[self.pos].isspace()
+                ):
+            self.pos += 1
 
     def skip_comment(self) -> None:
         """Пропускает комментарии"""
