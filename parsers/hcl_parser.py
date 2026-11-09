@@ -183,12 +183,118 @@ class HCL_Parser:
 
     def parse_list(self) -> list:
         """Чтение [...]"""
-        ...
+
+        lst = []
+
+        self.expect('[')
+        self.skip_ignored()
+
+
+        if self.pos >= len(self.text):
+            raise ValueError("Незакрытый список")
+
+        if self.text[self.pos] == ']':
+            self.expect(']')
+            return lst
+
+        while (
+            self.pos < len(self.text)
+        ):
+            self.skip_ignored()
+
+            lst.append( self.parse_value() )
+
+            self.skip_ignored()
+
+            if self.pos >= len(self.text):
+                raise ValueError("Незакрытый список")
+
+            if self.text[self.pos] == ']':
+                self.pos += 1
+                return lst
+
+            self.expect(',')
+
+        raise ValueError("Незакрытый список")
 
     def parse_object(self) -> dict:
         """Чтение {...}. Внутри имена полей и значения"""
-        ...
+        
+        dct = dict()
+
+        self.expect('{')
+        self.skip_ignored()
+
+        if self.pos >= len(self.text):
+            raise ValueError("Незакрытый объект")
+
+        if self.text[self.pos] == '}':
+            self.expect('}')
+            return dct
+
+        while (
+            self.pos < len(self.text)
+        ):
+            self.skip_ignored()
+
+            key = self.parse_identifier() # Получения ключа
+
+            self.skip_ignored()
+            if self.pos >= len(self.text):
+                raise ValueError("Незакрытый объект")
+
+            self.expect('=')
+
+            self.skip_ignored()
+            if self.pos >= len(self.text):
+                raise ValueError("У ключа нет значения")
+
+            value = self.parse_value() # Получение значения ключа
+
+            dct[key] = value
+
+            self.skip_ignored()
+            if self.pos >= len(self.text):
+                raise ValueError("Незакрытый объект")
+
+            if self.text[self.pos] == '}':
+                self.pos += 1
+                return dct
+
+            if self.text[self.pos] == ',':
+                self.pos += 1
+
+        raise ValueError("Незакрытый объект")
 
     def parse_value(self):
         """Выбор нужного способа разбора"""
-        ...
+        
+        self.skip_ignored()
+
+        if self.pos >= len(self.text):
+            raise ValueError("Ожидалось значение")
+
+        last = self.text[self.pos]
+
+        if last == '"':
+            return self.parse_string()
+        elif last.isdigit() or last == '-':
+            return self.parse_number()
+        elif last == '[':
+            return self.parse_list()
+        elif last == '{':
+            return self.parse_object()
+        elif last.isalpha() or last == '_':
+            txt = self.parse_identifier()
+
+            if txt == "true":
+                return True
+            elif txt == "false":
+                return False
+            elif txt == "null":
+                return None
+            else:
+                raise ValueError("Неверный формат")
+        else:
+            raise ValueError("Недопустимый символ")
+        
