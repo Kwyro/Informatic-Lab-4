@@ -1,5 +1,5 @@
+from multiprocessing.sharedctypes import Value
 class HCL_Parser:
-
     def __init__(self, text):
         self.text = text
         self.pos = 0
@@ -91,7 +91,44 @@ class HCL_Parser:
 
     def parse_string(self) -> str:
         """Чтение строки"""
-        ...
+
+        escapes = {
+            '"': '"',
+            "\\": "\\",
+            "n": "\n",
+            "r": "\r",
+            "t": "\t",
+        }
+        
+        string = ""
+
+        self.expect('"')
+
+        while (
+            self.pos < len(self.text)
+            and self.text[self.pos] != '"'
+        ):  
+            if self.text[self.pos] == '\\':
+                self.pos += 1
+
+                if self.pos >= len(self.text):
+                    raise ValueError("Текст закончился после обратной косой черты")
+                
+                if self.text[self.pos] not in escapes.keys():
+                    raise ValueError("Неизвестное экранирование")
+
+                string += escapes[self.text[self.pos]]
+            else:
+                string += self.text[self.pos]
+            
+            self.pos += 1
+
+        if self.pos >= len(self.text):
+            raise ValueError("Незакрытая строка")
+
+        self.pos += 1 # Пропуск закрывающей ковычки
+
+        return string
 
     def parse_number(self) -> int | float:
         """Чтение числа"""
