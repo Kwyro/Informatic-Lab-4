@@ -1,5 +1,41 @@
 class HCL_Parser:
 
-    def __init__(self, data, data_type):
-        self.data = data
-        self.data_type = data_type
+    def __init__(self, text):
+        self.text = test
+        self.pos = 0
+
+    def parse(self) -> dict:
+        """Разбор всего файла"""
+        ...
+
+    def skip_whitespace(self) -> None:
+        """Пропускет пробелы, переносы строк и табуляцию"""
+        ...
+
+    def skip_comment(self) -> None:
+        """Пропускает комментарии"""
+        ...
+
+    def parse_identifier(self) -> str:
+        """Чтение имени поля"""
+        ...
+
+    def parse_string(self) -> str:
+        """Чтение строки"""
+        ...
+
+    def parse_number(self) -> int | float:
+        """Чтение числа"""
+        ...
+
+    def parse_list(self) -> list:
+        """Чтение [...]"""
+        ...
+
+    def parse_object(self) -> dict:
+        """Чтение {...}. Внутри имена полей и значения"""
+        ...
+
+    def parse_value(self):
+        """Выбор нужного способа разбора"""
+        ...
