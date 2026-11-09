@@ -18,8 +18,26 @@ class HCL_Parser:
             self.pos += 1
 
     def skip_comment(self) -> None:
-        """Пропускает комментарии"""
-        ...
+        """Пропускает однострочные комментарии"""
+        
+        while (
+                self.pos < len(self.text)
+                and self.text[self.pos] != '\n'
+                ):
+            self.pos += 1
+
+    def skip_multiline_comment(self) -> None:
+        """Пропускает многострочные комментарии"""
+
+        self.pos += 2 # Пропускаем открывающиеся /*
+        
+        while (
+                self.pos < len(self.text)
+                and self.text[self.pos: self.pos + 2] != "*/"  
+                ):
+            self.pos += 1
+
+        self.pos += 2 # Пропускаем закрывающие */
 
     def parse_identifier(self) -> str:
         """Чтение имени поля"""
