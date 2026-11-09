@@ -1,7 +1,7 @@
 class HCL_Parser:
 
     def __init__(self, text):
-        self.text = test
+        self.text = text
         self.pos = 0
 
     def parse(self) -> dict:
@@ -37,7 +37,29 @@ class HCL_Parser:
                 ):
             self.pos += 1
 
+        # Проверка на то, что комментарий закрыли
+        if self.pos == len(self.text):
+            raise ValueError("Незакрытый многострочный комментарий")
+
         self.pos += 2 # Пропускаем закрывающие */
+
+    def skip_ignored(self) -> None:
+        """Пропускает комментарии и пробельные символы"""
+
+        while (self.pos < len(self.text)):
+            self.skip_whitespace()
+
+            if self.text.startswith("#", self.pos):
+                self.skip_comment()
+
+            elif self.text.startswith("//", self.pos):
+                self.skip_comment()
+
+            elif self.text.startswith("/*", self.pos):
+                self.skip_multiline_comment()
+
+            else:
+                break
 
     def parse_identifier(self) -> str:
         """Чтение имени поля"""
