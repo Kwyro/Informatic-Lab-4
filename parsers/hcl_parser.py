@@ -1,4 +1,3 @@
-from multiprocessing.sharedctypes import Value
 class HCL_Parser:
     def __init__(self, text):
         self.text = text
@@ -132,7 +131,55 @@ class HCL_Parser:
 
     def parse_number(self) -> int | float:
         """Чтение числа"""
-        ...
+        
+        number = ""
+
+        if self.pos >= len(self.text):
+            raise ValueError("Ожидалось число")
+
+        if self.text[self.pos] == '-':
+            number += '-'
+            self.pos += 1
+
+        # Проверка целой части
+
+        if self.pos >= len(self.text) or not self.text[self.pos].isdigit():
+            raise ValueError("Ожидалась цифра")
+
+        while (
+            self.pos < len(self.text)
+            and self.text[self.pos].isdigit()
+        ):
+            number += self.text[self.pos]
+            self.pos += 1
+
+        if self.pos < len(self.text) and self.text[self.pos] == '-':
+            raise ValueError("Неверный формат числа")
+
+        # Проверка дробной части
+
+        if self.pos < len(self.text) and self.text[self.pos] == '.':
+            number += '.'
+            self.pos += 1
+
+            if self.pos >= len(self.text) or not self.text[self.pos].isdigit():
+                raise ValueError("Ожидалась цифра")
+
+            while (
+                self.pos < len(self.text)
+                and self.text[self.pos].isdigit()
+            ):
+                number += self.text[self.pos]
+                self.pos += 1
+
+        if self.pos < len(self.text) and self.text[self.pos] in ['.', '-']:
+            raise ValueError("Неверный формат числа")
+
+        # Вывод
+
+        if number.count('.') == 1: return float(number)
+        
+        return int(number)
 
     def parse_list(self) -> list:
         """Чтение [...]"""
