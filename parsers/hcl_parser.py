@@ -61,6 +61,14 @@ class HCL_Parser:
             else:
                 break
 
+    def expect(self, symbol):
+        """Проверка, что на позиции находится ожидаемый символ"""
+
+        if self.pos < len(self.text) and self.text[self.pos] == symbol:
+            self.pos += 1
+        else:
+            raise ValueError("Неправильный символ или текст закончился")
+
     def parse_identifier(self) -> str:
         """Чтение имени поля"""
         ...
