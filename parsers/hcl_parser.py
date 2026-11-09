@@ -71,7 +71,23 @@ class HCL_Parser:
 
     def parse_identifier(self) -> str:
         """Чтение имени поля"""
-        ...
+        
+        identifier = ""
+
+        if self.pos >= len(self.text):
+            raise ValueError("Ожидалось имя поля")
+
+        if not (self.text[self.pos].isalpha() or self.text[self.pos] == "_"):
+            raise ValueError("Первый символ имени поля должен быть буквой или _")
+
+        while (
+            self.pos < len(self.text)
+            and (self.text[self.pos].isalnum() or self.text[self.pos] == "_")
+        ):
+            identifier += self.text[self.pos]
+            self.pos += 1
+
+        return identifier
 
     def parse_string(self) -> str:
         """Чтение строки"""
