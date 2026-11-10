@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schedule>
+	<group>P3107</group>
+	<week_parity>нечётная</week_parity>
+	<days>
+		<item>
+			<day>Понедельник</day>
+			<lessons>
+				<item>
+					<time>11:30-13:00</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+						<item>17</item>
+					</weeks>
+					<group>P3107</group>
+					<room>1328</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>English A2 / Английский язык A2 (Прак)</subject>
+					<teacher>Чуприна Лилия Сергеевна</teacher>
+					<format>Очно</format>
+				</item>
+				<item>
+					<time>13:30-15:00</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+						<item>17</item>
+					</weeks>
+					<group>P3107</group>
+					<room>1328</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>English A2 / Английский язык A2 (Прак)</subject>
+					<teacher>Чуприна Лилия Сергеевна</teacher>
+					<format>Очно</format>
+				</item>
+				<item>
+					<time>15:30-17:00</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+						<item>17</item>
+					</weeks>
+					<group>P3107</group>
+					<room>2304</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>Основы дискретной математики (базовый уровень) (Лек)</subject>
+					<teacher>Поляков Владимир Иванович</teacher>
+					<format>Очно</format>
+				</item>
+				<item>
+					<time>17:10-18:40</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+						<item>17</item>
+					</weeks>
+					<group>P3107</group>
+					<room>2304</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>Основы дискретной математики (базовый уровень) (Прак)</subject>
+					<teacher>Поляков Владимир Иванович</teacher>
+					<format>Очно</format>
+				</item>
+			</lessons>
+		</item>
+		<item>
+			<day>Четверг</day>
+			<lessons>
+				<item>
+					<time>08:10-09:40</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+					</weeks>
+					<group>P3107</group>
+					<room>1316</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>Социальная история России (Прак)</subject>
+					<teacher>Кудина Юлия Игоревна</teacher>
+					<format>Очно</format>
+				</item>
+				<item>
+					<time>11:30-13:00</time>
+					<weeks>
+						<item>3</item>
+						<item>5</item>
+						<item>7</item>
+						<item>9</item>
+						<item>11</item>
+						<item>13</item>
+						<item>15</item>
+					</weeks>
+					<group>P3107</group>
+					<room>1405</room>
+					<building>Кронверкский пр., д.49, лит.А</building>
+					<subject>Социальная история России (Лек)</subject>
+					<teacher>Сосницкий Дмитрий Александрович</teacher>
+					<format>Очно</format>
+				</item>
+			</lessons>
+		</item>
+	</days>
+</schedule>
